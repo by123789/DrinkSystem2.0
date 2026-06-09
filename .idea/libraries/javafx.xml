@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="javafx">
+    <CLASSES />
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../openjfx-17.0.19_windows-x64_bin-sdk/javafx-sdk-17.0.19/src/javafx.base" />
+      <root url="file://$PROJECT_DIR$/../openjfx-17.0.19_windows-x64_bin-sdk/javafx-sdk-17.0.19/src/javafx.controls" />
+      <root url="file://$PROJECT_DIR$/../openjfx-17.0.19_windows-x64_bin-sdk/javafx-sdk-17.0.19/src/javafx.fxml" />
+      <root url="file://$PROJECT_DIR$/../openjfx-17.0.19_windows-x64_bin-sdk/javafx-sdk-17.0.19/src/javafx.graphics" />
+      <root url="file://$PROJECT_DIR$/../openjfx-17.0.19_windows-x64_bin-sdk/javafx-sdk-17.0.19/src/javafx.media" />
+      <root url="file://$PROJECT_DIR$/../openjfx-17.0.19_windows-x64_bin-sdk/javafx-sdk-17.0.19/src/javafx.swing" />
+      <root url="file://$PROJECT_DIR$/../openjfx-17.0.19_windows-x64_bin-sdk/javafx-sdk-17.0.19/src/javafx.web" />
+    </SOURCES>
+  </library>
+</component>

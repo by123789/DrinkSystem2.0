@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.drink.controller.UserController">
+    <fx:define>
+        <ToggleGroup fx:id="genderGroup"/>
+    </fx:define>
+    <center>
+        <VBox spacing="15" style="-fx-padding:10;">
+            <!-- 用户表格 -->
+            <TableView fx:id="userTable" prefHeight="250">
+                <columns>
+                    <TableColumn fx:id="colId" text="ID" prefWidth="60"/>
+                    <TableColumn fx:id="colUsername" text="用户名" prefWidth="100"/>
+                    <TableColumn fx:id="colAge" text="年龄" prefWidth="60"/>
+                    <TableColumn fx:id="colAddress" text="地址" prefWidth="120"/>
+                    <TableColumn fx:id="colPhone" text="电话" prefWidth="100"/>
+                    <TableColumn fx:id="colGender" text="性别" prefWidth="60"/>
+                    <TableColumn fx:id="colNation" text="民族" prefWidth="80"/>
+                    <TableColumn fx:id="colHobby" text="爱好" prefWidth="140"/>
+                    <TableColumn fx:id="colPassword" text="密码" prefWidth="100"/>
+                </columns>
+            </TableView>
+
+            <!-- 用户信息表单 -->
+            <VBox spacing="10" style="-fx-padding:5;">
+                <Label text="用户信息管理" style="-fx-font-size:16; -fx-font-weight:bold;"/>
+                <GridPane hgap="10" vgap="10">
+                    <Label text="用户名" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                    <TextField fx:id="tfUsername" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                    <Label text="年龄" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+                    <TextField fx:id="tfAge" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+
+                    <Label text="电话" GridPane.rowIndex="0" GridPane.columnIndex="4"/>
+                    <TextField fx:id="tfPhone" GridPane.rowIndex="0" GridPane.columnIndex="5"/>
+
+                    <Label text="地址" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                    <TextField fx:id="tfAddress" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                    <Label text="性别" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+                    <HBox spacing="10" GridPane.rowIndex="1" GridPane.columnIndex="3">
+                        <RadioButton fx:id="rbMale" text="男" toggleGroup="$genderGroup"/>
+                        <RadioButton fx:id="rbFemale" text="女" toggleGroup="$genderGroup"/>
+                    </HBox>
+
+                    <Label text="民族" GridPane.rowIndex="1" GridPane.columnIndex="4"/>
+                    <ComboBox fx:id="cbNation" GridPane.rowIndex="1" GridPane.columnIndex="5" prefWidth="150"/>
+
+                    <Label text="爱好" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                    <VBox spacing="5" GridPane.rowIndex="2" GridPane.columnIndex="1" GridPane.columnSpan="5">
+                        <HBox spacing="15">
+                            <CheckBox fx:id="cbSport" text="运动"/>
+                            <CheckBox fx:id="cbRead" text="阅读"/>
+                            <CheckBox fx:id="cbGame" text="游戏"/>
+                            <CheckBox fx:id="cbTravel" text="旅游"/>
+                            <CheckBox fx:id="cbCoding" text="编码"/>
+                        </HBox>
+                    </VBox>
+
+                    <Label text="密码" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                    <PasswordField fx:id="tfPassword" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                </GridPane>
+
+                <!-- 按钮区域 -->
+                <HBox spacing="15" alignment="CENTER" style="-fx-padding:5;">
+                    <Button text="新增用户" onAction="#add" style="-fx-background-color:#28a745;-fx-text-fill:white"/>
+                    <Button text="修改用户" onAction="#update"/>
+                    <Button text="删除用户" onAction="#delete"/>
+                    <Button text="重置" onAction="#reset"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button text="返回" onAction="#close"/>
+                </HBox>
+            </VBox>
+        </VBox>
+    </center>
+</BorderPane>

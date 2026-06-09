@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.drink.controller.BuyController">
+
+    <top>
+        <VBox spacing="5">
+            <HBox alignment="CENTER_RIGHT" spacing="10">
+                <Label text="用户ID：" />
+                <Label fx:id="lblUserId" style="-fx-font-weight: bold; -fx-text-fill: #0066cc;" />
+                <Label text=" | " />
+                <Label text="用户名：" />
+                <Label fx:id="lblUsername" style="-fx-font-weight: bold; -fx-text-fill: #0066cc;" />
+                <padding>
+                    <Insets right="20.0" top="5.0" bottom="5.0" />
+                </padding>
+            </HBox>
+            <HBox spacing="10">
+                <TextField fx:id="tname" promptText="商品名称" />
+                <ComboBox fx:id="tcategory" prefWidth="150" />
+                <Button onAction="#search" text="搜索" />
+                <padding>
+                    <Insets left="100.0" />
+                </padding>
+                <BorderPane.margin>
+                    <Insets top="5.0" />
+                </BorderPane.margin>
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <SplitPane dividerPositions="0.5">
+            <VBox spacing="10">
+                <TableView fx:id="table" prefHeight="300.0">
+                    <columns>
+                        <TableColumn fx:id="id" prefWidth="80" text="编号" />
+                        <TableColumn fx:id="name" prefWidth="100" text="名称" />
+                        <TableColumn fx:id="price" prefWidth="60" text="价格" />
+                        <TableColumn fx:id="stock" prefWidth="60" text="库存" />
+                        <TableColumn fx:id="category" prefWidth="100" text="分类" />
+                        <TableColumn fx:id="supplier" prefWidth="100" text="供应商" />
+                        <TableColumn fx:id="brand" prefWidth="80" text="品牌" />
+                        <TableColumn fx:id="spec" prefWidth="80" text="规格" />
+                    </columns>
+                    <VBox.margin>
+                        <Insets left="20.0" top="10.0" />
+                    </VBox.margin>
+                </TableView>
+
+                <GridPane hgap="10" vgap="10">
+                    <Label text="编号 :" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        <GridPane.margin>
+                            <Insets left="10.0" />
+                        </GridPane.margin>
+                    </Label>
+                    <TextField fx:id="tid" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <Label text="名称 :" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                        <GridPane.margin>
+                            <Insets left="40.0" />
+                        </GridPane.margin>
+                    </Label>
+                    <TextField fx:id="tname2" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+
+                    <Label text="价格 :" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                        <GridPane.margin>
+                            <Insets left="10.0" />
+                        </GridPane.margin>
+                    </Label>
+                    <TextField fx:id="tprice" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <Label text="库存 :" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                        <GridPane.margin>
+                            <Insets left="40.0" />
+                        </GridPane.margin>
+                    </Label>
+                    <TextField fx:id="tstock" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+
+                    <Label text="分类 :" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                        <GridPane.margin>
+                            <Insets left="10.0" />
+                        </GridPane.margin>
+                    </Label>
+                    <TextField fx:id="tcategory2" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <Label text="供应商 :" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                        <GridPane.margin>
+                            <Insets left="40.0" />
+                        </GridPane.margin>
+                    </Label>
+                    <TextField fx:id="tsupplier" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+
+                    <Label text="品牌 :" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                        <GridPane.margin>
+                            <Insets left="10.0" />
+                        </GridPane.margin>
+                    </Label>
+                    <TextField fx:id="tbrand" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    <Label text="规格 :" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                        <GridPane.margin>
+                            <Insets left="40.0" />
+                        </GridPane.margin>
+                    </Label>
+                    <TextField fx:id="tspec" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+
+                    <Label text="购买数量 :" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                    <Spinner fx:id="tnum" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                    <Button onAction="#addToCart" text="加入购物车" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                    <columnConstraints>
+                        <ColumnConstraints />
+                        <ColumnConstraints />
+                        <ColumnConstraints />
+                        <ColumnConstraints />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="26.39998779296875" minHeight="11.99998779296875" prefHeight="22.39998779296875" />
+                        <RowConstraints maxHeight="34.400012207031246" minHeight="21.60001220703125" prefHeight="25.60001220703125" />
+                        <RowConstraints />
+                        <RowConstraints />
+                        <RowConstraints />
+                    </rowConstraints>
+                    <VBox.margin>
+                        <Insets left="20.0" />
+                    </VBox.margin>
+                </GridPane>
+
+                <HBox alignment="CENTER" spacing="10">
+                    <Button onAction="#reset" text="重置" />
+                    <Button onAction="#logout" text="退出登录" />
+                    <padding>
+                        <Insets bottom="10.0" />
+                    </padding>
+                </HBox>
+            </VBox>
+
+            <VBox spacing="10">
+                <Label text="购物车">
+                    <VBox.margin>
+                        <Insets left="10.0" />
+                    </VBox.margin>
+                </Label>
+                <TableView fx:id="cartTable" layoutX="100.0" prefHeight="200">
+                    <columns>
+                        <TableColumn fx:id="cartId" prefWidth="80" text="编号" />
+                        <TableColumn fx:id="cartName" prefWidth="120" text="名称" />
+                        <TableColumn fx:id="cartPrice" prefWidth="80" text="单价" />
+                        <TableColumn fx:id="cartNum" prefWidth="80" text="数量" />
+                        <TableColumn fx:id="cartMoney" prefWidth="100" text="小计" />
+                    </columns>
+                </TableView>
+
+                <HBox layoutX="80.0">
+                    <Label text="总金额：" />
+                    <TextField fx:id="tmoney" editable="false" layoutX="100.0" prefHeight="23.0" prefWidth="176.0" />
+                    <padding>
+                        <Insets top="15.0" />
+                    </padding>
+                </HBox>
+
+                <VBox spacing="5">
+                    <HBox spacing="10">
+                        <Label text="收货人 :" />
+                        <TextField fx:id="treceiver" prefHeight="23.0" prefWidth="175.0" />
+                        <VBox.margin>
+                            <Insets top="20.0" />
+                        </VBox.margin>
+                        <padding>
+                            <Insets bottom="5.0" />
+                        </padding>
+                    </HBox>
+                    <HBox spacing="10">
+                        <Label text="联系方式 :" />
+                        <TextField fx:id="tphone" prefHeight="23.0" prefWidth="165.0" />
+                        <VBox.margin>
+                            <Insets top="20.0" />
+                        </VBox.margin>
+                    </HBox>
+                    <HBox spacing="10">
+                        <Label text="收货地址 :" />
+                        <TextField fx:id="taddress" prefHeight="23.0" prefWidth="165.0">
+                            <HBox.margin>
+                                <Insets />
+                            </HBox.margin>
+                        </TextField>
+                        <VBox.margin>
+                            <Insets top="20.0" />
+                        </VBox.margin>
+                    </HBox>
+                </VBox>
+
+                <HBox spacing="10">
+                    <Button onAction="#deleteCart" text="删除选中" />
+                    <Button onAction="#save" text="结算" />
+                    <Button onAction="#clearCart" text="清空" />
+                    <VBox.margin>
+                        <Insets left="10.0" />
+                    </VBox.margin>
+                    <padding>
+                        <Insets top="10.0" />
+                    </padding>
+                </HBox>
+                <padding>
+                    <Insets left="30.0" />
+                </padding>
+            </VBox>
+        </SplitPane>
+    </center>
+</BorderPane>

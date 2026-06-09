@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<BorderPane xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.drink.controller.UserInfoController">
+    <fx:define>
+        <ToggleGroup fx:id="genderGroup"/>
+    </fx:define>
+    <center>
+        <VBox spacing="20" style="-fx-padding: 20;">
+
+            <!-- 标题 -->
+            <Label text="用户信息维护" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #415f96;">
+                <padding><Insets top="10" bottom="10"/></padding>
+            </Label>
+
+            <!-- 当前登录用户信息展示 -->
+            <TitledPane text="当前用户信息" expanded="true">
+                <GridPane hgap="15" vgap="15" style="-fx-padding: 15;">
+                    <Label text="用户名：" GridPane.rowIndex="0" GridPane.columnIndex="0" style="-fx-font-size: 14px;"/>
+                    <Label fx:id="lblUsername" text="" GridPane.rowIndex="0" GridPane.columnIndex="1" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+
+                    <Label text="用户ID：" GridPane.rowIndex="0" GridPane.columnIndex="2" style="-fx-font-size: 14px;"/>
+                    <Label fx:id="lblUserId" text="" GridPane.rowIndex="0" GridPane.columnIndex="3" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+
+                    <Label text="年龄：" GridPane.rowIndex="1" GridPane.columnIndex="0" style="-fx-font-size: 14px;"/>
+                    <Label fx:id="lblAge" text="" GridPane.rowIndex="1" GridPane.columnIndex="1" style="-fx-font-size: 14px;"/>
+
+                    <Label text="性别：" GridPane.rowIndex="1" GridPane.columnIndex="2" style="-fx-font-size: 14px;"/>
+                    <Label fx:id="lblGender" text="" GridPane.rowIndex="1" GridPane.columnIndex="3" style="-fx-font-size: 14px;"/>
+
+                    <Label text="地址：" GridPane.rowIndex="2" GridPane.columnIndex="0" style="-fx-font-size: 14px;"/>
+                    <Label fx:id="lblAddress" text="" GridPane.rowIndex="2" GridPane.columnIndex="1" GridPane.columnSpan="3" style="-fx-font-size: 14px;"/>
+
+                    <Label text="爱好：" GridPane.rowIndex="3" GridPane.columnIndex="0" style="-fx-font-size: 14px;"/>
+                    <Label fx:id="lblHobby" text="" GridPane.rowIndex="3" GridPane.columnIndex="1" GridPane.columnSpan="3" style="-fx-font-size: 14px;"/>
+
+                    <Label text="民族：" GridPane.rowIndex="4" GridPane.columnIndex="0" style="-fx-font-size: 14px;"/>
+                    <Label fx:id="lblNation" text="" GridPane.rowIndex="4" GridPane.columnIndex="1" GridPane.columnSpan="3" style="-fx-font-size: 14px;"/>
+                </GridPane>
+            </TitledPane>
+
+            <!-- 修改信息表单 -->
+            <TitledPane text="修改个人信息" expanded="true">
+                <VBox spacing="15" style="-fx-padding: 15;">
+
+                    <!-- 修改昵称 -->
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="新昵称：" prefWidth="80" style="-fx-font-size: 14px;"/>
+                        <TextField fx:id="tfNewUsername" prefWidth="250" promptText="输入新的昵称"/>
+                    </HBox>
+
+                    <!-- 修改密码 -->
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="新密码：" prefWidth="80" style="-fx-font-size: 14px;"/>
+                        <PasswordField fx:id="pfNewPassword" prefWidth="250" promptText="输入新密码"/>
+                    </HBox>
+
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="确认密码：" prefWidth="80" style="-fx-font-size: 14px;"/>
+                        <PasswordField fx:id="pfConfirmPassword" prefWidth="250" promptText="再次输入新密码"/>
+                    </HBox>
+
+                    <!-- 绑定手机号 -->
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="手机号：" prefWidth="80" style="-fx-font-size: 14px;"/>
+                        <TextField fx:id="tfPhone" prefWidth="250" promptText="输入手机号码"/>
+                    </HBox>
+
+                    <!-- 性别选择（单选按钮） -->
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="性别：" prefWidth="80" style="-fx-font-size: 14px;"/>
+                        <RadioButton fx:id="rbMale" text="男" toggleGroup="$genderGroup"/>
+                        <RadioButton fx:id="rbFemale" text="女" toggleGroup="$genderGroup" selected="true"/>
+                    </HBox>
+
+                    <!-- 民族选择（下拉框） -->
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="民族：" prefWidth="80" style="-fx-font-size: 14px;"/>
+                        <ComboBox fx:id="cbNation" prefWidth="250" promptText="选择民族"/>
+                    </HBox>
+
+                    <!-- 爱好选择（复选框） -->
+                    <VBox spacing="8" style="-fx-padding: 5 0 0 80;">
+                        <Label text="爱好：" style="-fx-font-size: 14px;"/>
+                        <HBox spacing="15">
+                            <CheckBox fx:id="cbSport" text="运动"/>
+                            <CheckBox fx:id="cbRead" text="阅读"/>
+                            <CheckBox fx:id="cbGame" text="游戏"/>
+                            <CheckBox fx:id="cbTravel" text="旅游"/>
+                            <CheckBox fx:id="cbCoding" text="编码"/>
+                        </HBox>
+                    </VBox>
+
+                    <!-- 按钮区域 -->
+                    <HBox spacing="15" alignment="CENTER_RIGHT" style="-fx-padding: 10 0 0 0;">
+                        <Button text="保存修改" onAction="#saveInfo" style="-fx-background-color: #415f96; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 8 20;"/>
+                        <Button text="重置" onAction="#resetForm" style="-fx-font-size: 14px; -fx-padding: 8 20;"/>
+                    </HBox>
+                </VBox>
+            </TitledPane>
+
+            <!-- 消费记录查询 -->
+            <TitledPane text="我的订单历史" expanded="false">
+                <VBox spacing="10" style="-fx-padding: 15;">
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="饮料类型：" style="-fx-font-size: 14px;"/>
+                        <ComboBox fx:id="cbCategory" prefWidth="150" promptText="全部"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button text="查询订单" onAction="#queryMyOrders" style="-fx-background-color: #415f96; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 8 20;"/>
+                    </HBox>
+
+                    <TableView fx:id="orderTable" prefHeight="300">
+                        <columns>
+                            <TableColumn fx:id="colOrderId" text="订单ID" prefWidth="80"/>
+                            <TableColumn fx:id="colDrinkName" text="饮料名称" prefWidth="120"/>
+                            <TableColumn fx:id="colCategory" text="类型" prefWidth="80"/>
+                            <TableColumn fx:id="colPrice" text="单价" prefWidth="80"/>
+                            <TableColumn fx:id="colQuantity" text="数量" prefWidth="60"/>
+                            <TableColumn fx:id="colTotal" text="总价" prefWidth="80"/>
+                            <TableColumn fx:id="colConsignee" text="收货人" prefWidth="100"/>
+                            <TableColumn fx:id="colPhone" text="联系电话" prefWidth="120"/>
+                            <TableColumn fx:id="colCreateTime" text="下单时间" prefWidth="180"/>
+                        </columns>
+                    </TableView>
+
+                    <HBox spacing="10" alignment="CENTER">
+                        <Label fx:id="lblOrderCount" text="共 0 条订单" style="-fx-font-size: 14px; -fx-text-fill: #666;"/>
+                    </HBox>
+                </VBox>
+            </TitledPane>
+
+        </VBox>
+    </center>
+</BorderPane>

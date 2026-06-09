@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+
+<BorderPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.drink.controller.MainController">
+
+    <top>
+        <MenuBar style="-fx-background-color: #415f96; -fx-padding: 5;">
+            <Menu text="用户功能菜单" style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;">
+                <MenuItem onAction="#openBuyModal" text="🛒 用户下单" />
+                <MenuItem onAction="#openUserInfoModal" text="👤 个人信息维护" />
+
+            </Menu>
+            <Menu text="管理员功能菜单" style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;">
+                <MenuItem onAction="#openOrderModal" text="📋 订单查询" />
+                <MenuItem onAction="#openAdminModal" text="⚙️ 商品管理" />
+                <MenuItem onAction="#openUserModal" text="👥 用户管理" />
+                <MenuItem onAction="#openDrinkTypeModal" text="🗂️ 饮料分类管理" />
+            </Menu>
+            <Menu text="系统" style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;">
+                <MenuItem onAction="#logout" text="🚪 退出登录" />
+            </Menu>
+
+
+        </MenuBar>
+    </top>
+    <bottom>
+        <AnchorPane fx:id="contentPane" prefHeight="427.0" prefWidth="1094.0" BorderPane.alignment="CENTER">
+            <children>
+
+                <!-- 背景装饰矩形 -->
+                <Rectangle width="1000" height="600" opacity="0.05">
+                    <fill>
+                        <LinearGradient startX="0" startY="0" endX="1" endY="1">
+                            <stops>
+                                <Stop offset="0.0" color="#415f96"/>
+                                <Stop offset="1.0" color="#ffffff"/>
+                            </stops>
+                        </LinearGradient>
+                    </fill>
+                </Rectangle>
+
+                <!-- 主标题 -->
+                <Label layoutX="195.0" layoutY="127.0" prefHeight="122.0" prefWidth="623.0" text="饮料售卖系统" textFill="#415f96" AnchorPane.rightAnchor="181.79999999999995">
+                    <font>
+                        <Font name="Microsoft YaHei Bold" size="72.0" />
+                    </font>
+                    <effect>
+                        <DropShadow color="#415f96" radius="10" offsetX="3" offsetY="3"/>
+                    </effect>
+                </Label>
+
+                <!-- 用户信息卡片 -->
+                <HBox layoutX="697.0" layoutY="60.0" spacing="15" style="-fx-background-color: linear-gradient(to bottom, #f8f9fa, #e9ecef); -fx-border-color: #415f96; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 15 20 15 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 3);">
+                    <children>
+                        <Label text="用户ID:" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #415f96;">
+                            <font><Font name="Microsoft YaHei" size="18.0"/></font>
+                        </Label>
+                        <Label fx:id="txuid" prefHeight="30.0" prefWidth="102.0" text="Label" style="-fx-font-size: 18px; -fx-text-fill: #333;">
+                            <font><Font name="Microsoft YaHei" size="18.0"/></font>
+                        </Label>
+                        <Label text="用户名:" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #415f96; -fx-margin-left: 20;">
+                            <font><Font name="Microsoft YaHei" size="18.0"/></font>
+                        </Label>
+                        <Label fx:id="txuname" text="Label" style="-fx-font-size: 18px; -fx-text-fill: #333;">
+                            <font><Font name="Microsoft YaHei" size="18.0"/></font>
+                        </Label>
+                    </children>
+                </HBox>
+
+                <!-- 底部信息容器 -->
+                <VBox layoutX="539.0" layoutY="520.0" spacing="10" alignment="CENTER_RIGHT" AnchorPane.rightAnchor="50.0">
+                    <children>
+                        <Label text="项目创作者：郝伟祯" style="-fx-font-size: 18px; -fx-text-fill: #666;">
+                            <font><Font name="Microsoft YaHei" size="18.0"/></font>
+                        </Label>
+                        <Label text="2026.6" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #415f96;">
+                            <font><Font name="Microsoft YaHei Bold" size="22.0"/></font>
+                        </Label>
+                    </children>
+                </VBox>
+
+            </children></AnchorPane>
+    </bottom>
+</BorderPane>
