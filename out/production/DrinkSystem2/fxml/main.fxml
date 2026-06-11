@@ -84,7 +84,7 @@
                 <!-- 底部信息容器 -->
                 <VBox layoutX="539.0" layoutY="520.0" spacing="10" alignment="CENTER_RIGHT" AnchorPane.rightAnchor="50.0">
                     <children>
-                        <Label text="小组成员：郝伟祯, 王璐瑶，支新贻，石天宇" style="-fx-font-size: 18px; -fx-text-fill: #666;">
+                        <Label text="项目创作者：郝伟祯" style="-fx-font-size: 18px; -fx-text-fill: #666;">
                             <font><Font name="Microsoft YaHei" size="18.0"/></font>
                         </Label>
                         <Label text="2026.6" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #415f96;">

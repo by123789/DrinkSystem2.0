@@ -22,6 +22,7 @@ public class UserDAO {
                 user.setAddress(rs.getString("address"));
                 user.setGender(rs.getString("gender"));
                 user.setHobby(rs.getString("hobby"));
+                user.setNation(rs.getString("nation"));
                 return user;
             }
         } catch (Exception e) {
@@ -32,7 +33,7 @@ public class UserDAO {
 
     public boolean register(User user) {
         if (exists(user.getUsername())) return false;
-        String sql = "INSERT INTO user(username, password, age, phone, address, gender, hobby) VALUES(?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO user(username, password, age, phone, address, gender, hobby, nation) VALUES(?,?,?,?,?,?,?,?)";
         try (Connection conn = BaseDB.getConn();
              PreparedStatement pst = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             pst.setString(1, user.getUsername());
@@ -42,6 +43,7 @@ public class UserDAO {
             pst.setString(5, user.getAddress());
             pst.setString(6, user.getGender());
             pst.setString(7, user.getHobby());
+            pst.setString(8, user.getNation() != null ? user.getNation() : "汉族");
             int affectedRows = pst.executeUpdate();
             if (affectedRows > 0) {
                 ResultSet generatedKeys = pst.getGeneratedKeys();
@@ -84,7 +86,7 @@ public class UserDAO {
     }
 
     public boolean updateUser(User user) {
-        String sql = "UPDATE user SET password=?, age=?, phone=?, address=?, gender=?, hobby=? WHERE username=?";
+        String sql = "UPDATE user SET password=?, age=?, phone=?, address=?, gender=?, hobby=?, nation=? WHERE username=?";
         try (Connection conn = BaseDB.getConn();
              PreparedStatement pst = conn.prepareStatement(sql)) {
             pst.setString(1, user.getPassword());
@@ -93,7 +95,8 @@ public class UserDAO {
             pst.setString(4, user.getAddress());
             pst.setString(5, user.getGender());
             pst.setString(6, user.getHobby());
-            pst.setString(7, user.getUsername());
+            pst.setString(7, user.getNation() != null ? user.getNation() : "汉族");
+            pst.setString(8, user.getUsername());
             return pst.executeUpdate() > 0;
         } catch (Exception e) {
             e.printStackTrace();

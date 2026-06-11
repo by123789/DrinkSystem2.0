@@ -14,7 +14,7 @@ public class OrderController {
     @FXML private ComboBox<String> tname, pageNo;
     @FXML private TableView<Order> table;
     @FXML private TableColumn<Order, Integer> cid, cnum;
-    @FXML private TableColumn<Order, String> cusername, ctname, cdname, creceiver, caddress, cphone, ctime;
+    @FXML private TableColumn<Order, String> cusername, ctname, cdname, creceiver, caddress, cphone, ctime, ctemperature;
     @FXML private TableColumn<Order, Double> ctotal;
     @FXML private Label pageInfo1, pageInfo2;
 
@@ -34,6 +34,7 @@ public class OrderController {
         caddress.setCellValueFactory(new PropertyValueFactory<>("address"));
         cphone.setCellValueFactory(new PropertyValueFactory<>("phone"));
         ctime.setCellValueFactory(new PropertyValueFactory<>("createTime"));
+        ctemperature.setCellValueFactory(new PropertyValueFactory<>("temperature"));
 
         tname.getItems().addAll("全部","碳酸饮料","茶饮","矿泉水","功能饮料","奶茶","果汁");
         tname.setValue("全部");

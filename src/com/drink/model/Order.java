@@ -15,10 +15,11 @@ public class Order {
     private String address;
     private String createTime;
     private String category; // 饮料类型，数据库列名：category
+    private String temperature; // 温度状态：冰镇、常温、热饮
 
     public Order() {}
 
-    public Order(int id, String username, String drinkId, String drinkName, double price, int quantity, double total, int num, double money, String phone, String consignee, String address, String createTime, String category) {
+    public Order(int id, String username, String drinkId, String drinkName, double price, int quantity, double total, int num, double money, String phone, String consignee, String address, String createTime, String category, String temperature) {
         this.id = id;
         this.username = username;
         this.drinkId = drinkId;
@@ -33,6 +34,7 @@ public class Order {
         this.address = address;
         this.createTime = createTime;
         this.category = category;
+        this.temperature = temperature;
     }
 
     public int getId() { return id; }
@@ -74,7 +76,9 @@ public class Order {
     public String getCreateTime() { return createTime; }
     public void setCreateTime(String createTime) { this.createTime = createTime; }
 
-    // 和数据库 category 列对应
     public String getCategory() { return category; }
     public void setCategory(String category) { this.category = category; }
+
+    public String getTemperature() { return temperature; }
+    public void setTemperature(String temperature) { this.temperature = temperature; }
 }

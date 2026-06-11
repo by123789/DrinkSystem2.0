@@ -16,7 +16,7 @@ import java.util.List;
 
 public class BuyController {
     @FXML private TableView<Drink> table;
-    @FXML private TableColumn<Drink, String> id, name, category, supplier, brand, spec;
+    @FXML private TableColumn<Drink, String> id, name, category, supplier, brand, spec, temperature;
     @FXML private TableColumn<Drink, Double> price;
     @FXML private TableColumn<Drink, Integer> stock;
 
@@ -25,10 +25,12 @@ public class BuyController {
     @FXML private TableColumn<Drink, Double> cartPrice;
     @FXML private TableColumn<Drink, Integer> cartNum;
     @FXML private TableColumn<Drink, Double> cartMoney;
+    @FXML private TableColumn<Drink, String> cartTemperature;
 
     @FXML private TextField tname, tid, tname2, tprice, tstock, tcategory2, tsupplier, tbrand, tspec;
     @FXML private TextField treceiver, taddress, tphone, tmoney;
     @FXML private ComboBox<String> tcategory;
+    @FXML private ComboBox<String> ttemperature;
     @FXML private Spinner<Integer> tnum;
     @FXML private Label lblUserId;
     @FXML private Label lblUsername;
@@ -47,17 +49,22 @@ public class BuyController {
         supplier.setCellValueFactory(new PropertyValueFactory<>("supplier"));
         brand.setCellValueFactory(new PropertyValueFactory<>("brand"));
         spec.setCellValueFactory(new PropertyValueFactory<>("spec"));
+        temperature.setCellValueFactory(new PropertyValueFactory<>("temperature"));
 
         cartId.setCellValueFactory(new PropertyValueFactory<>("id"));
         cartName.setCellValueFactory(new PropertyValueFactory<>("name"));
         cartPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         cartNum.setCellValueFactory(new PropertyValueFactory<>("buyNum"));
         cartMoney.setCellValueFactory(new PropertyValueFactory<>("totalMoney"));
+        cartTemperature.setCellValueFactory(new PropertyValueFactory<>("temperature"));
 
         table.getItems().addAll(drinkDAO.getAll());
         tnum.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 1));
         tcategory.getItems().addAll("全部", "饮料", "茶饮", "矿泉水", "功能饮料", "奶茶", "果汁");
         tcategory.setValue("全部");
+
+        ttemperature.getItems().addAll("冰镇", "常温", "热饮");
+        ttemperature.setValue("冰镇");
 
         table.getSelectionModel().selectedItemProperty().addListener((o, old, val) -> {
             if (val != null) fillData(val);
@@ -78,6 +85,11 @@ public class BuyController {
         tsupplier.setText(d.getSupplier());
         tbrand.setText(d.getBrand());
         tspec.setText(d.getSpec());
+        if (d.getTemperature() != null && !d.getTemperature().isEmpty()) {
+            ttemperature.setValue(d.getTemperature());
+        } else {
+            ttemperature.setValue("冰镇");
+        }
     }
 
     @FXML
@@ -93,6 +105,11 @@ public class BuyController {
             return;
         }
 
+        String selectedTemp = ttemperature.getValue();
+        if (selectedTemp == null || selectedTemp.isEmpty()) {
+            selectedTemp = "冰镇";
+        }
+
         Drink cartItem = new Drink();
         cartItem.setId(d.getId());
         cartItem.setName(d.getName());
@@ -100,6 +117,7 @@ public class BuyController {
         cartItem.setCategory(d.getCategory());
         cartItem.setBuyNum(num);
         cartItem.setTotalMoney(num * d.getPrice());
+        cartItem.setTemperature(selectedTemp);
 
         cartList.add(cartItem);
         cartTable.getItems().setAll(cartList);
@@ -157,6 +175,12 @@ public class BuyController {
             o.setTotal(d.getTotalMoney());
             o.setCategory(d.getCategory());
 
+            String temp = d.getTemperature();
+            if (temp == null || temp.isEmpty()) {
+                temp = "冰镇";
+            }
+            o.setTemperature(temp);
+
             o.setConsignee(treceiver.getText().trim());
             o.setPhone(tphone.getText().trim());
             o.setAddress(taddress.getText().trim());
@@ -196,6 +220,7 @@ public class BuyController {
         taddress.clear();
         tphone.clear();
         tnum.getValueFactory().setValue(1);
+        ttemperature.setValue("冰镇");
     }
 
     @FXML

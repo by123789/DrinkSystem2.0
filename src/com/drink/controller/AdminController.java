@@ -19,7 +19,8 @@ public class AdminController {
     @FXML private TableView<Drink> table;
     @FXML private TableColumn<Drink, String> id, name, category, supplier, brand, spec;
     @FXML private TableColumn<Drink, Double> price;
-    @FXML private TableColumn<Drink, Integer> stock, status;
+    @FXML private TableColumn<Drink, Integer> stock;
+    @FXML private TableColumn<Drink, String> status;
 
     @FXML private TextField searchName;
     @FXML private ComboBox<String> searchCategory;
@@ -45,8 +46,8 @@ public class AdminController {
         searchCategory.getItems().addAll(cats);
         searchCategory.setValue("全部");
         tfCategory.getItems().addAll(cats);
-        tfStatus.getItems().addAll("常温", "冰镇", "热饮");
-        tfStatus.setValue("常温");
+        tfStatus.getItems().addAll("冰镇", "常温", "热饮");
+        tfStatus.setValue("冰镇");
 
         refresh();
 
@@ -202,7 +203,7 @@ public class AdminController {
         tfBrand.clear();
         tfSpec.clear();
         tfCategory.setValue(null);
-        tfStatus.setValue("常温");
+        tfStatus.setValue("冰镇");
         table.getSelectionModel().clearSelection();
     }
 

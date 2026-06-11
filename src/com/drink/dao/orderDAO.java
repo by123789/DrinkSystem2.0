@@ -11,7 +11,7 @@ import java.util.List;
 public class orderDAO {
 
     public boolean add(Order o) {
-        String sql = "INSERT INTO orders(username, drink_id, drink_name, price, quantity, total, consignee, phone, address, category, create_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
+        String sql = "INSERT INTO orders(username, drink_id, drink_name, price, quantity, total, consignee, phone, address, category, temperature, create_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
 
         try (Connection conn = BaseDB.getConn();
              PreparedStatement pst = conn.prepareStatement(sql)) {
@@ -26,6 +26,7 @@ public class orderDAO {
             pst.setString(8, o.getPhone());
             pst.setString(9, o.getAddress());
             pst.setString(10, o.getCategory());
+            pst.setString(11, o.getTemperature());
 
             int rows = pst.executeUpdate();
             return rows > 0;
@@ -40,32 +41,35 @@ public class orderDAO {
         List<Order> list = new ArrayList<>();
 
         StringBuilder sql = new StringBuilder(
-                "SELECT o.*, d.category FROM orders o " +
-                        "LEFT JOIN drink d ON o.drink_id = d.id " +
-                        "WHERE 1=1 "
+                "SELECT * FROM orders WHERE 1=1 "
         );
 
         if (!para.getOid().isEmpty())
-            sql.append(" AND o.id LIKE '%").append(para.getOid()).append("%'");
+            sql.append(" AND id LIKE '%").append(para.getOid()).append("%'");
         if (!para.getUname().isEmpty())
-            sql.append(" AND o.username LIKE '%").append(para.getUname()).append("%'");
+            sql.append(" AND username LIKE '%").append(para.getUname()).append("%'");
         if (!para.getDname().isEmpty())
-            sql.append(" AND o.drink_name LIKE '%").append(para.getDname()).append("%'");
+            sql.append(" AND drink_name LIKE '%").append(para.getDname()).append("%'");
         if (!para.getReceiver().isEmpty())
-            sql.append(" AND o.consignee LIKE '%").append(para.getReceiver()).append("%'");
+            sql.append(" AND consignee LIKE '%").append(para.getReceiver()).append("%'");
         if (!para.getPhone().isEmpty())
-            sql.append(" AND o.phone LIKE '%").append(para.getPhone()).append("%'");
+            sql.append(" AND phone LIKE '%").append(para.getPhone()).append("%'");
         if (!para.getStart().isEmpty())
-            sql.append(" AND o.create_time >= '").append(para.getStart()).append("'");
+            sql.append(" AND create_time >= '").append(para.getStart()).append("'");
         if (!para.getEnd().isEmpty())
-            sql.append(" AND o.create_time <= '").append(para.getEnd()).append(" 23:59:59'");
+            sql.append(" AND create_time <= '").append(para.getEnd()).append(" 23:59:59'");
 
         if (!para.getTname().isEmpty()) {
-            sql.append(" AND d.category = '").append(para.getTname()).append("'");
+            sql.append(" AND category = '").append(para.getTname()).append("'");
         }
 
         int offset = (page - 1) * pageSize;
-        sql.append(" ORDER BY o.id DESC LIMIT ?, ?");
+        sql.append(" ORDER BY id DESC LIMIT ?, ?");
+
+        System.out.println("=== DEBUG SQL ===");
+        System.out.println(sql.toString());
+        System.out.println("Parameters: offset=" + offset + ", pageSize=" + pageSize);
+        System.out.println("=================");
 
         try (Connection conn = BaseDB.getConn();
              PreparedStatement pst = conn.prepareStatement(sql.toString())) {
@@ -87,6 +91,7 @@ public class orderDAO {
                 o.setAddress(rs.getString("address"));
                 o.setCreateTime(rs.getString("create_time"));
                 o.setCategory(rs.getString("category"));
+                o.setTemperature(rs.getString("temperature"));
                 list.add(o);
             }
         } catch (Exception e) {
@@ -97,29 +102,31 @@ public class orderDAO {
 
     public int countOrders(OrdersPara para) {
         StringBuilder sql = new StringBuilder(
-                "SELECT COUNT(*) FROM orders o " +
-                        "LEFT JOIN drink d ON o.drink_id = d.id " +
-                        "WHERE 1=1 "
+                "SELECT COUNT(*) FROM orders WHERE 1=1 "
         );
 
         if (!para.getOid().isEmpty())
-            sql.append(" AND o.id LIKE '%").append(para.getOid()).append("%'");
+            sql.append(" AND id LIKE '%").append(para.getOid()).append("%'");
         if (!para.getUname().isEmpty())
-            sql.append(" AND o.username LIKE '%").append(para.getUname()).append("%'");
+            sql.append(" AND username LIKE '%").append(para.getUname()).append("%'");
         if (!para.getDname().isEmpty())
-            sql.append(" AND o.drink_name LIKE '%").append(para.getDname()).append("%'");
+            sql.append(" AND drink_name LIKE '%").append(para.getDname()).append("%'");
         if (!para.getReceiver().isEmpty())
-            sql.append(" AND o.consignee LIKE '%").append(para.getReceiver()).append("%'");
+            sql.append(" AND consignee LIKE '%").append(para.getReceiver()).append("%'");
         if (!para.getPhone().isEmpty())
-            sql.append(" AND o.phone LIKE '%").append(para.getPhone()).append("%'");
+            sql.append(" AND phone LIKE '%").append(para.getPhone()).append("%'");
         if (!para.getStart().isEmpty())
-            sql.append(" AND o.create_time >= '").append(para.getStart()).append("'");
+            sql.append(" AND create_time >= '").append(para.getStart()).append("'");
         if (!para.getEnd().isEmpty())
-            sql.append(" AND o.create_time <= '").append(para.getEnd()).append(" 23:59:59'");
+            sql.append(" AND create_time <= '").append(para.getEnd()).append(" 23:59:59'");
 
         if (!para.getTname().isEmpty()) {
-            sql.append(" AND d.category = '").append(para.getTname()).append("'");
+            sql.append(" AND category = '").append(para.getTname()).append("'");
         }
+
+        System.out.println("=== DEBUG COUNT SQL ===");
+        System.out.println(sql.toString());
+        System.out.println("=======================");
 
         try (Connection conn = BaseDB.getConn();
              PreparedStatement pst = conn.prepareStatement(sql.toString())) {

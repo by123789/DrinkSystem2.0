@@ -65,6 +65,8 @@
                 <TableColumn fx:id="caddress" text="派送地址" prefWidth="150"/>
                 <TableColumn fx:id="cphone" text="联系电话" prefWidth="120"/>
                 <TableColumn fx:id="ctime" text="下单时间" prefWidth="150"/>
+                <TableColumn fx:id="ctemperature" text="状态" prefWidth="80"/>
+
             </columns>
         </TableView>
     </center>
